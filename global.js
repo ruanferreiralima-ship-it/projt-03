@@ -103,3 +103,56 @@
    
        document.body.appendChild(btnFloat);
    }
+
+   /* ============================================================
+   SISTEMA GLOBAL DE TOASTS
+   ============================================================ */
+function exibirToast(mensagem, tipo = "warning", titulo = "", duracao = 4000) {
+    let container = document.querySelector(".toast-container");
+    if (!container) {
+        container = document.createElement("div");
+        container.className = "toast-container";
+        container.setAttribute("aria-live", "polite");
+        document.body.appendChild(container);
+    }
+
+    const config = {
+        success: { icone: "fa-circle-check", tituloPadrao: "Sucesso" },
+        error: { icone: "fa-circle-xmark", tituloPadrao: "Atenção" },
+        warning: { icone: "fa-triangle-exclamation", tituloPadrao: "Aviso" }
+    };
+
+    const { icone, tituloPadrao } = config[tipo] || config.warning;
+
+    const toast = document.createElement("div");
+    toast.className = `toast-item toast-${tipo}`;
+    toast.setAttribute("role", "status");
+
+    toast.innerHTML = `
+        <i class="fa-solid ${icone} toast-icon"></i>
+        <div class="toast-content">
+            <strong class="toast-title">${titulo || tituloPadrao}</strong>
+            <span>${mensagem}</span>
+        </div>
+        <button type="button" class="toast-close" aria-label="Fechar notificação">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="toast-progress" style="animation-duration: ${duracao}ms;"></div>
+    `;
+
+    container.appendChild(toast);
+
+    // Dispara a animação de entrada
+    requestAnimationFrame(() => {
+        toast.classList.add("show");
+    });
+
+    const fecharToast = () => {
+        toast.classList.remove("show");
+        toast.classList.add("hide");
+        setTimeout(() => toast.remove(), 350);
+    };
+
+    toast.querySelector(".toast-close").addEventListener("click", fecharToast);
+    setTimeout(fecharToast, duracao);
+}

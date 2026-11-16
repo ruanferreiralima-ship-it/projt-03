@@ -1,5 +1,5 @@
 /* ============================================================
-   VALIDACAO.JS - CADASTRO E LOGIN
+   VALIDACAO.JS - CADASTRO, LOGIN E RECUPERAÇÃO DE SENHA
    Login: 6 a 10 caracteres (letras, números e caracteres especiais)
    Senha: 6 a 10 caracteres (apenas letras e números)
    Complemento: Opcional
@@ -10,6 +10,7 @@
     if (!form) return;
 
     const isCadastro = Boolean(document.getElementById("nome"));
+    const isRecuperacao = Boolean(document.getElementById("email")) && !isCadastro && !document.getElementById("login");
 
     const campos = {
         nome: document.getElementById("nome"),
@@ -29,6 +30,15 @@
         confirmarSenha: document.getElementById("confirmar_senha"),
         termos: document.getElementById("termos")
     };
+
+    // Fallback caso global.js ainda não tenha carregado exibirToast
+    function notificar(mensagem, tipo = "warning", titulo = "", duracao = 4000) {
+        if (typeof exibirToast === "function") {
+            exibirToast(mensagem, tipo, titulo, duracao);
+        } else {
+            console.warn(`[${tipo.toUpperCase()}] ${titulo}: ${mensagem}`);
+        }
+    }
 
     function definirStatusCampo(input, valido, mensagem = "") {
         if (!input) return;
@@ -109,6 +119,48 @@
         return /^[A-Za-z0-9]{6,10}$/.test(valor);
     }
 
+    // ============================================================
+    // FLUXO DE RECUPERAÇÃO DE SENHA (recuperarsenha.html)
+    // ============================================================
+    if (isRecuperacao) {
+        if (campos.email) {
+            campos.email.addEventListener("input", () => {
+                const ok = validarEmail(campos.email.value);
+                definirStatusCampo(campos.email, ok, ok ? "E-mail válido!" : "Digite um e-mail válido.");
+            });
+        }
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const emailVal = campos.email ? campos.email.value.trim() : "";
+
+            if (!validarEmail(emailVal)) {
+                definirStatusCampo(campos.email, false, "Informe um e-mail válido.");
+                notificar(
+                    "Por favor, digite um endereço de e-mail válido para continuar.",
+                    "warning",
+                    "E-mail inválido"
+                );
+                return;
+            }
+
+            notificar(
+                `Se o e-mail ${emailVal} estiver cadastrado, enviaremos as instruções de recuperação.`,
+                "success",
+                "Solicitação enviada",
+                3000
+            );
+
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 2600);
+        });
+        return;
+    }
+
+    // ============================================================
+    // MÁSCARAS DE LOGIN E SENHA (login.html e cadastro.html)
+    // ============================================================
     if (campos.login) {
         campos.login.addEventListener("input", (e) => {
             e.target.value = e.target.value.replace(/\s/g, "").slice(0, 10);
@@ -173,6 +225,9 @@
         });
     }
 
+    // ============================================================
+    // FLUXO DE LOGIN (login.html)
+    // ============================================================
     if (!isCadastro) {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -181,7 +236,11 @@
             const senhaVal = campos.senha.value;
 
             if (!validarLogin(loginVal) || !validarSenha(senhaVal)) {
-                alert("Verifique o formato do login (6 a 10 caracteres) e da senha (6 a 10 letras ou números).");
+                notificar(
+                    "Verifique o formato do login (6 a 10 caracteres) e da senha (6 a 10 letras ou números).",
+                    "warning",
+                    "Dados incompletos"
+                );
                 return;
             }
 
@@ -192,17 +251,32 @@
 
             if (usuarioEncontrado) {
                 localStorage.setItem("usuario_logado", JSON.stringify(usuarioEncontrado));
-                alert(`Bem-vindo(a), ${usuarioEncontrado.nome}!`);
-                window.location.href = "index.html";
+                localStorage.setItem("ruan_usuario_logado", JSON.stringify(usuarioEncontrado));
+                notificar(
+                    `Bem-vindo(a), ${usuarioEncontrado.nome}! Redirecionando...`,
+                    "success",
+                    "Login realizado",
+                    1800
+                );
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 1500);
             } else {
                 definirStatusCampo(campos.login, false, "Login ou senha incorretos.");
                 definirStatusCampo(campos.senha, false, "Verifique suas credenciais.");
-                alert("Login ou senha inválidos! Caso ainda não tenha conta, clique em 'Criar conta'.");
+                notificar(
+                    "Login ou senha inválidos! Caso ainda não tenha conta, clique em 'Criar conta'.",
+                    "error",
+                    "Falha no acesso"
+                );
             }
         });
         return;
     }
 
+    // ============================================================
+    // FLUXO DE CADASTRO (cadastro.html)
+    // ============================================================
     const filtrarLetras = (e) => {
         e.target.value = e.target.value.replace(/[^a-zA-Zà-úÀ-Ú\s]/g, "");
     };
@@ -394,7 +468,11 @@
         ];
 
         if (validacoes.includes(false)) {
-            alert("Por favor, corrija os campos destacados em vermelho antes de finalizar o cadastro.");
+            notificar(
+                "Por favor, corrija os campos destacados em vermelho antes de finalizar o cadastro.",
+                "error",
+                "Formulário inválido"
+            );
             const primeiroInvalido = form.querySelector(".is-invalid");
             if (primeiroInvalido) primeiroInvalido.focus();
             return;
@@ -425,14 +503,25 @@
 
         if (usuarioExiste) {
             definirStatusCampo(campos.cpf, false, "Este CPF ou Login já está cadastrado.");
-            alert("Este Login ou CPF já está cadastrado no sistema!");
+            notificar(
+                "Este Login ou CPF já está cadastrado no sistema!",
+                "error",
+                "Cadastro duplicado"
+            );
             return;
         }
 
         cadastrosExistentes.push(usuario);
         localStorage.setItem("usuarios_cadastrados", JSON.stringify(cadastrosExistentes));
 
-        alert("Cadastro realizado com sucesso!");
-        window.location.href = "login.html";
+        notificar(
+            "Cadastro realizado com sucesso! Redirecionando para o login...",
+            "success",
+            "Conta criada",
+            2000
+        );
+        setTimeout(() => {
+            window.location.href = "login.html";
+        }, 1800);
     });
 });
