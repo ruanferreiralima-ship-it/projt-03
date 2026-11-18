@@ -60,161 +60,182 @@
     </header>
 
     <main class="login-page">
-        <section class="login-card">
-            <div class="login-header">
-                <h1>Cadastro de Usuário</h1>
-                <p>Preencha os dados abaixo para criar seu cadastro.</p>
-            </div>
+        <form class="login-form cadastro-wrapper" action="#" method="post">
+            
+            <!-- =====================================================
+                 CAIXA 1: DADOS PESSOAIS E ENDEREÇO
+                 ===================================================== -->
+            <section class="login-card">
+                <div class="login-header">
+                    <span class="step-badge"><i class="fa-solid fa-address-card"></i> Etapa 1 de 2</span>
+                    <h1>Cadastro de Usuário</h1>
+                    <p>Preencha seus dados pessoais e endereço abaixo.</p>
+                </div>
 
-            <form class="login-form" action="#" method="post">
-                <div class="form-group">
-                    <label for="nome">Nome Completo <span>*</span></label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" minlength="15" maxlength="80" required>
+                <div class="card-fields">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo <span>*</span></label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" minlength="15" maxlength="80" required>
+                        </div>
+                        <small>Mínimo de 15 caracteres alfabéticos.</small>
                     </div>
-                    <small>Mínimo de 15 caracteres alfabéticos.</small>
-                </div>
 
-                <div class="form-group">
-                    <label for="nascimento">Data de Nascimento <span>*</span></label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-calendar"></i>
-                        <input type="date" id="nascimento" name="nascimento" required>
+                    <div class="form-group">
+                        <label for="nascimento">Data de Nascimento <span>*</span></label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-calendar"></i>
+                            <input type="date" id="nascimento" name="nascimento" required>
+                        </div>
+                        <small></small>
                     </div>
-                    <small></small>
-                </div>
 
-                <div class="form-group">
-                    <label for="sexo">Sexo <span>*</span></label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-venus-mars"></i>
-                        <select id="sexo" name="sexo" required>
-                            <option value="">Selecione...</option>
-                            <option value="masculino">Masculino</option>
-                            <option value="feminino">Feminino</option>
-                            <option value="outro">Outro</option>
-                        </select>
+                    <div class="form-group">
+                        <label for="sexo">Sexo <span>*</span></label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-venus-mars"></i>
+                            <select id="sexo" name="sexo" required>
+                                <option value="">Selecione...</option>
+                                <option value="masculino">Masculino</option>
+                                <option value="feminino">Feminino</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        <small></small>
                     </div>
-                    <small></small>
-                </div>
 
-                <div class="form-group">
-                    <label for="nome_mae">Nome Materno <span>*</span></label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-person-breastfeeding"></i>
-                        <input type="text" id="nome_mae" name="nome_mae" placeholder="Nome completo da mãe" minlength="15" maxlength="80" required>
+                    <div class="form-group">
+                        <label for="nome_mae">Nome Materno <span>*</span></label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-person-breastfeeding"></i>
+                            <input type="text" id="nome_mae" name="nome_mae" placeholder="Nome completo da mãe" minlength="15" maxlength="80" required>
+                        </div>
+                        <small></small>
                     </div>
-                    <small></small>
-                </div>
 
-                <div class="form-group">
-                    <label for="cpf">CPF <span>*</span></label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-id-card"></i>
-                        <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" required>
+                    <div class="form-group">
+                        <label for="cpf">CPF <span>*</span></label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-id-card"></i>
+                            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" required>
+                        </div>
+                        <small></small>
                     </div>
-                    <small></small>
-                </div>
 
-                <div class="form-group">
-                    <label for="celular">Telefone Celular <span>*</span></label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-mobile-screen"></i>
-                        <input type="text" id="celular" name="celular" placeholder="(+55)21-999999999" required>
+                    <div class="form-group">
+                        <label for="celular">Telefone Celular <span>*</span></label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                            <input type="text" id="celular" name="celular" placeholder="(+55)21-999999999" required>
+                        </div>
+                        <small></small>
                     </div>
-                    <small></small>
-                </div>
 
-                <div class="form-group">
-                    <label for="telefone">Telefone Fixo <span>*</span></label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-phone"></i>
-                        <input type="text" id="telefone" name="telefone" placeholder="(+55)21-22223333" required>
+                    <div class="form-group">
+                        <label for="telefone">Telefone Fixo <span>*</span></label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="text" id="telefone" name="telefone" placeholder="(+55)21-22223333" required>
+                        </div>
+                        <small></small>
                     </div>
-                    <small></small>
-                </div>
 
-                <div class="form-group">
-                    <label for="cep">CEP <span>*</span></label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-map-pin"></i>
-                        <input type="text" id="cep" name="cep" placeholder="00000-000" maxlength="9" required>
+                    <div class="form-group">
+                        <label for="cep">CEP <span>*</span></label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-map-pin"></i>
+                            <input type="text" id="cep" name="cep" placeholder="00000-000" maxlength="9" required>
+                        </div>
+                        <small></small>
                     </div>
-                    <small></small>
-                </div>
 
-                <div class="form-group">
-                    <label for="endereco">Endereço Completo <span>*</span></label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <input type="text" id="endereco" name="endereco" placeholder="Rua, Bairro, Cidade - Estado" required>
+                    <div class="form-group">
+                        <label for="endereco">Endereço Completo <span>*</span></label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <input type="text" id="endereco" name="endereco" placeholder="Rua, Bairro, Cidade - Estado" required>
+                        </div>
+                        <small></small>
                     </div>
-                    <small></small>
-                </div>
 
-                <div class="form-group">
-                    <label for="numero">Número <span>*</span></label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-hashtag"></i>
-                        <input type="text" id="numero" name="numero" placeholder="Digite o número" required>
+                    <div class="form-group">
+                        <label for="numero">Número <span>*</span></label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-hashtag"></i>
+                            <input type="text" id="numero" name="numero" placeholder="Digite o número" required>
+                        </div>
+                        <small></small>
                     </div>
-                    <small></small>
-                </div>
 
-                <div class="form-group">
-                    <label for="complemento">Complemento <small style="display:inline; opacity:0.75;">(opcional)</small></label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-building"></i>
-                        <input type="text" id="complemento" name="complemento" placeholder="Apto, Bloco, Casa, Sala..." maxlength="60">
+                    <div class="form-group">
+                        <label for="complemento">Complemento <small style="display:inline; opacity:0.75;">(opcional)</small></label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-building"></i>
+                            <input type="text" id="complemento" name="complemento" placeholder="Apto, Bloco, Casa, Sala..." maxlength="60">
+                        </div>
+                        <small></small>
                     </div>
-                    <small></small>
+                </div>
+            </section>
+
+            <!-- =====================================================
+                 CAIXA 2: DADOS DE ACESSO (LOGIN E SENHA)
+                 ===================================================== -->
+            <section class="login-card">
+                <div class="login-header">
+                    <span class="step-badge"><i class="fa-solid fa-key"></i> Etapa 2 de 2</span>
+                    <h2>Dados de Login</h2>
+                    <p>Crie seu login de usuário e senha para entrar no sistema.</p>
                 </div>
 
-                <div class="form-group">
-                    <label for="login">Login <span>*</span></label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-user-check"></i>
-                        <input type="text" id="login" name="login" placeholder="6 a 10 caracteres (letras, números ou símbolos)" minlength="6" maxlength="10" pattern="\S{6,10}" required>
+                <div class="card-fields">
+                    <div class="form-group">
+                        <label for="login">Usuário <span>*</span></label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-user-check"></i>
+                            <input type="text" id="login" name="login" placeholder="6 a 10 caracteres (letras, números ou símbolos)" minlength="6" maxlength="10" pattern="\S{6,10}" required>
+                        </div>
+                        <small>Informe de 6 a 10 caracteres (letras, números e símbolos, sem espaços).</small>
                     </div>
-                    <small>Informe de 6 a 10 caracteres (letras, números e símbolos, sem espaços).</small>
-                </div>
 
-                <div class="form-group">
-                    <label for="senha">Senha <span>*</span></label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" id="senha" name="senha" placeholder="6 a 10 caracteres (letras e números)" minlength="6" maxlength="10" pattern="[A-Za-z0-9]{6,10}" required>
+                    <div class="form-group">
+                        <label for="senha">Senha <span>*</span></label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="senha" name="senha" placeholder="6 a 10 caracteres (letras e números)" minlength="6" maxlength="10" pattern="[A-Za-z0-9]{6,10}" required>
+                        </div>
+                        <small>Informe de 6 a 10 caracteres (apenas letras e números).</small>
                     </div>
-                    <small>Informe de 6 a 10 caracteres (apenas letras e números).</small>
-                </div>
 
-                <div class="form-group">
-                    <label for="confirmar_senha">Confirmação de Senha <span>*</span></label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Digite a senha novamente" minlength="6" maxlength="10" pattern="[A-Za-z0-9]{6,10}" required>
+                    <div class="form-group">
+                        <label for="confirmar_senha">Confirmação de Senha <span>*</span></label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Digite a senha novamente" minlength="6" maxlength="10" pattern="[A-Za-z0-9]{6,10}" required>
+                        </div>
+                        <small></small>
                     </div>
-                    <small></small>
+
+                    <div class="terms-group">
+                        <input type="checkbox" id="termos" required>
+                        <label for="termos">Confirmo que todos os meus dados preenchidos são verdadeiros e estão corretos.</label>
+                    </div>
+
+                    <button type="submit" class="btn-gold">
+                        <i class="fa-solid fa-user-plus"></i> Cadastrar Usuário
+                    </button>
                 </div>
 
-                <div class="terms-group">
-                    <input type="checkbox" id="termos" required>
-                    <label for="termos">Confirmo que todos os meus dados preenchidos são verdadeiros e estão corretos.</label>
+                <div class="back-home">
+                    <a href="index.html">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Voltar para a página inicial
+                    </a>
                 </div>
+            </section>
 
-                <button type="submit" class="btn-gold">
-                    <i class="fa-solid fa-user-plus"></i> Cadastrar Usuário
-                </button>
-            </form>
-
-            <div class="back-home">
-                <a href="index.html">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    Voltar
-                </a>
-            </div>
-        </section>
+        </form>
     </main>
 
     <script src="global.js"></script>

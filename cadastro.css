@@ -1,5 +1,5 @@
 /* ============================================================
-   RUAN INSULFILM - CADASTRO MODERNO (COLUNA ÚNICA CENTRALIZADA)
+   RUAN INSULFILM - CADASTRO MODERNO (DUAS CAIXAS SEPARADAS)
    ============================================================ */
 
    :root {
@@ -49,23 +49,31 @@ header {
 }
 
 /* ============================================================
-   CONTAINER E CARD CENTRALIZADO
+   CONTAINER E CARDS SEPARADOS
    ============================================================ */
 
 .login-page {
     flex: 1;
     width: 100%;
-    max-width: 490px;
+    max-width: 520px;
     margin: 0 auto;
     padding: 40px 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
+.cadastro-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px; /* Espaçamento entre a Caixa 1 e a Caixa 2 */
+}
+
 .login-card {
     width: 100%;
-    padding: 42px 38px;
+    padding: 40px 38px;
     background: linear-gradient(160deg, var(--card), var(--card-2));
     border: 1px solid var(--border);
     border-radius: 18px;
@@ -73,21 +81,38 @@ header {
 }
 
 /* ============================================================
-   CABEÇALHO
+   CABEÇALHO DE CADA CAIXA
    ============================================================ */
 
 .login-header {
-    margin-bottom: 28px;
-    padding-bottom: 20px;
+    margin-bottom: 26px;
+    padding-bottom: 18px;
     text-align: center;
     border-bottom: 1px solid var(--border);
 }
 
-.login-header h1 {
+.step-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    margin-bottom: 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border-strong);
+    background: rgba(212, 175, 55, 0.10);
+    color: var(--gold);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.login-header h1,
+.login-header h2 {
     margin: 0 0 8px;
     color: var(--text);
     font-family: var(--font-title);
-    font-size: 1.65rem;
+    font-size: 1.55rem;
     font-weight: 700;
     letter-spacing: 0.04em;
 }
@@ -100,10 +125,10 @@ header {
 }
 
 /* ============================================================
-   FORMULÁRIO VERTICAL LIMPO E BEM ESPAÇADO
+   CAMPOS INTERNOS DAS CAIXAS
    ============================================================ */
 
-.login-form {
+.card-fields {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -328,6 +353,10 @@ body.light-mode .form-group small.success-feedback {
 @media (max-width: 520px) {
     .login-page {
         padding: 20px 12px;
+    }
+
+    .cadastro-wrapper {
+        gap: 20px;
     }
 
     .login-card {

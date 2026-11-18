@@ -1606,3 +1606,194 @@ body.light-mode .toast-item {
     from { transform: scaleX(1); }
     to { transform: scaleX(0); }
 }
+
+/* ============================================================
+   BADGE DO USUÁRIO LOGADO (CANTO SUPERIOR DIREITO)
+   ============================================================ */
+   .user-session-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 8px 5px 14px;
+    border-radius: 30px;
+    background: rgba(212, 175, 55, 0.10);
+    border: 1px solid var(--border-strong);
+    color: var(--text-main);
+    font-size: 0.78rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+body.light-mode .user-session-badge {
+    background: rgba(184, 151, 46, 0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.user-session-info {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.user-session-info i {
+    color: var(--gold);
+    font-size: 1rem;
+}
+
+.user-session-info strong {
+    color: var(--gold);
+    font-weight: 700;
+}
+
+.btn-logout {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border: 1px solid rgba(239, 68, 68, 0.45);
+    border-radius: 20px;
+    background: rgba(239, 68, 68, 0.12);
+    color: #ff6b6b;
+    font-family: var(--font-main);
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+body.light-mode .btn-logout {
+    color: #c92a2a;
+    background: rgba(201, 42, 42, 0.08);
+}
+
+body.light-mode .btn-logout:hover {
+    background: #c92a2a;
+    color: #ffffff;
+}
+
+/* Versão compacta para telas sem navbar (Login / Cadastro) */
+.user-session-compact {
+    padding: 3px 6px 3px 10px;
+    font-size: 0.72rem;
+    gap: 8px;
+}
+
+.user-session-compact .btn-logout {
+    padding: 3px 9px;
+    font-size: 0.68rem;
+}
+
+@media (max-width: 768px) {
+    .navbar-actions .user-session-badge {
+        width: 100%;
+        justify-content: space-between;
+        padding: 8px 12px 8px 16px;
+    }
+}
+
+/* ============================================================
+   ETIQUETAS DE PREÇO DOS SERVIÇOS (USUÁRIOS LOGADOS)
+   ============================================================ */
+   .film-head-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.safety-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.35rem;
+}
+
+.safety-panel-head h2 {
+    margin: 0 !important;
+}
+
+.service-price-badge {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 7px 14px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.16), rgba(212, 175, 55, 0.06));
+    border: 1px solid var(--gold);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.service-price-badge:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.26), rgba(212, 175, 55, 0.12));
+    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.28);
+}
+
+.service-price-badge .price-main {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--gold);
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+.service-price-badge .price-sub {
+    color: var(--text-secondary);
+    font-size: 0.66rem;
+    font-weight: 500;
+    margin-top: 2px;
+}
+
+/* Botão discreto quando o visitante NÃO está logado */
+.service-price-locked {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px dashed var(--border-strong);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-secondary);
+    font-size: 0.70rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.service-price-locked:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(212, 175, 55, 0.08);
+}
+
+body.light-mode .service-price-badge {
+    background: linear-gradient(135deg, rgba(184, 151, 46, 0.15), rgba(184, 151, 46, 0.05));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 600px) {
+    .film-head-right {
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .service-price-badge {
+        align-items: flex-start;
+        width: 100%;
+    }
+}
